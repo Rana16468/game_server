@@ -1,0 +1,77 @@
+import config from "../../../app/config";
+
+const ForgotPasswordBody = async (
+  userData: {
+    username: string;
+  },
+  resetPasswordLink: string
+) => {
+  const currentDate = new Date().toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  
+
+  const senddata = {
+    html: `
+      <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; background-color: #f8f9fa; padding: 20px;">
+        <!-- Header -->
+        <div style="background-color: white; padding: 20px; margin-bottom: 20px; border-radius: 8px;">
+          <img src="${
+            config.company_logo
+          }" alt="Rate My Plate" style="height: 40px; margin-bottom: 10px;">
+          <div style="text-align: right; color: #6c757d; font-size: 14px;">
+            ${currentDate}
+          </div>
+        </div>
+    
+        <!-- Main Content -->
+        <div style="background-color: white; padding: 30px; border-radius: 8px; margin-bottom: 20px;">
+          <h2 style="color: #1a237e; margin: 0 0 20px 0; font-size: 24px;">Your Password Reset Link</h2>
+          
+          <p style="color: #333; margin-bottom: 15px;">Dear ${
+            userData?.username || "User"
+          },</p>
+          
+          <p style="color: #333; margin-bottom: 25px;">Here is your password reset link to securely update your Rate My Plate account password:</p>
+          
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${resetPasswordLink}" 
+               style="background-color: #4a148c; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+              Reset Password
+            </a>
+          </div>
+    
+          <p style="color: #666; font-size: 14px; margin-bottom: 5px;">Note: This reset link is valid for 15 minutes.</p>
+          
+          <p style="color: #666; font-size: 14px; margin-bottom: 20px;">If you did not request this password reset, please disregard this email or contact our support team.</p>
+          
+          <p style="color: #333; margin-bottom: 5px;">Thank you for using Rate My Plate!</p>
+        </div>
+    
+        <!-- Footer -->
+        <div style="text-align: center; padding: 20px;">
+          <p style="color: #666; margin-bottom: 15px;">Team Rate My Plate</p>
+          <!-- Contact Info -->
+          <div style="font-size: 12px; color: #666;">
+            <p style="margin: 5px 0;">
+              Email: ${config.company_email}
+            </p>
+            <p style="margin: 5px 0;">
+              Phone: ${config.company_info.company_phone_number}
+            </p>
+            <p style="margin: 5px 0;">
+              Address: ${config.company_info.company_location}
+            </p>
+          </div>
+        </div>
+      </div>
+    `,
+    subject: "Reset Your Rate My Plate Password",
+    text: "Reset your Rate My Plate account password",
+  };
+  return senddata;
+};
+
+export default ForgotPasswordBody;

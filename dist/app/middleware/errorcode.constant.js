@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ERROR_CODES = void 0;
+exports.ERROR_CODES = {
+    PRISMA: {
+        P2002: 'UNIQUE_CONSTRAINT_VIOLATION',
+        P2003: 'FOREIGN_KEY_VIOLATION',
+        P2025: 'RECORD_NOT_FOUND',
+        P2014: 'INVALID_ID',
+        P2021: 'TABLE_NOT_FOUND'
+    },
+    AUTH: {
+        INVALID_TOKEN: 'INVALID_TOKEN',
+        TOKEN_EXPIRED: 'TOKEN_EXPIRED'
+    },
+    VALIDATION: {
+        SCHEMA_VALIDATION: 'SCHEMA_VALIDATION_ERROR',
+        INPUT_VALIDATION: 'INPUT_VALIDATION_ERROR'
+    }
+};
